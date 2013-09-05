@@ -1,0 +1,7 @@
+<layout version="0.1.0">
+    <default>
+        <reference name="content">
+            <block type="web_ajaxproducts/js" after="category.products" name="ajax.products,js" template="extra/js.phtml"></block>
+        </reference>
+    </default>
+</layout>

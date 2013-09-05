@@ -1,0 +1,67 @@
+<?php
+$_helper = Mage::helper('web_ajaxproducts');
+if ($_helper->isEnabled()):
+    $_productCollection = $this->getLoadedProductCollection();
+    $ids = $_helper->getAjaxIds($_productCollection);?>
+    <div class="load-more-products"
+         style="display: none; font-weight: bold; padding: 6px; text-align: center; color: rgb(59, 89, 152); border: 1px solid;"><?php echo $this->__(
+            'Loading more products'
+        ); ?></div>
+    <script type="text/javascript">
+        Array.prototype.chunk = function (chunkSize) {
+            var array = this;
+            return [].concat.apply([],
+                array.map(function (elem, i) {
+                    return i % chunkSize ? [] : [array.slice(i, i + chunkSize)];
+                })
+            );
+        }
+        var pIds = <?php echo Zend_Json::encode($ids);?>;
+        var RequestOffset = <?php echo $_helper->getRequestOffset();?>;
+        var isRequest = false;
+        var endProducts = false;
+        var currentPage = 0;
+        var RequestLimit = <?php echo $_helper->getProductsPerRequest();?>;
+
+        function getMoreProducts() {
+            var y = (document.all) ? document.body.scrollTop : window.pageYOffset;
+            var max = window.scrollMaxY ||
+                (document.body.scrollHeight - document.body.clientHeight);
+            loadMoreSelector = '.load-more-products';
+            pidsArray = pIds.chunk(RequestLimit);
+            if ((max - y) < RequestOffset) {
+                if (isRequest || endProducts) {
+                    return;
+                }
+                if (typeof pidsArray[currentPage] == 'undefined') {
+                    endProducts = true;
+                    return;
+                }
+                isRequest = true;
+                $$(loadMoreSelector).first().show();
+                idParam = pidsArray[currentPage].toString();
+                new Ajax.Request('<?php echo $this->getUrl('ajax_product/index/index')?>', {
+                    method: 'post',
+                    parameters: {ids: idParam },
+                    onSuccess: function (transport) {
+                        var response = transport.responseText || "";
+                        //$$('.load-products')[0].hide();
+                        $$(loadMoreSelector).first().hide();
+                        if ($$('.products-list').first() != undefined) {
+                            $$('.products-list').first().down('.item:last').insert({after: response});
+                        } else {
+                            $$('.category-products').first().down('.products-grid:last').insert({after: response});
+                        }
+                        currentPage++;
+                        isRequest = false;
+                    },
+                    onFailure: function () {
+                        isRequest = true;
+                        alert('Something went wrong, please refresh the page and try again.');
+                    }
+                });
+            }
+        }
+        setInterval(getMoreProducts, 250);
+    </script>
+<?php endif; ?>

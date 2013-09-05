@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Web_AjaxProducts>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Bundle/>
+                <Mage_Catalog/>
+                <Mage_CatalogInventory/>
+                <Mage_CatalogSearch/>
+
+            </depends>
+        </Web_AjaxProducts>
+    </modules>
+</config>
