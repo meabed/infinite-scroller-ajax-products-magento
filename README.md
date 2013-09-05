@@ -12,9 +12,9 @@ Easy to install and configure, this module works 100% out of the box with Magent
 
 ###Installation:
 
-    * Download from githubt repo or Magento Connect.
-    * Configure the options for your theme on System / Configuration /Catalog / Ajax Products seccion.
-    * Scroll to infinity and beyond! 
+* Download from githubt repo or [Magento Connect] [1].
+* Configure the options for your theme on System / Configuration /Catalog / Ajax Products seccion.
+* Scroll to infinity and beyond! 
 
 Configuration:
 
@@ -25,3 +25,5 @@ If you have a different theme other than the default, you will need to copy the 
 ![Category page](http://i.imgur.com/3NV5vAk.png)
 
 ![Configuration Backend](http://i.imgur.com/Kv8fgRB.png)
+
+[1]:http://www.magentocommerce.com/magento-connect/catalog/product/view/id/19550/ "Magento Connect"
