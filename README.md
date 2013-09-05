@@ -19,3 +19,9 @@ Easy to install and configure, this module works 100% out of the box with Magent
 Configuration:
 
 If you have a different theme other than the default, you will need to copy the default theme files to your custom theme folder and configure the plugin by going to System / Configuration / Catalog / Ajax Products.
+
+###Screen shots
+
+![Category page](http://i.imgur.com/3NV5vAk.png)
+
+![Configuration Backend](http://i.imgur.com/Kv8fgRB.png)
